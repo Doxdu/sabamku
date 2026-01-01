@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Untuk Sabam 🤍</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      overflow: hidden;
+      background: linear-gradient(180deg, #0b1c2d, #081421);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Segoe UI', sans-serif;
+      color: #ffffff;
+    }
+
+    /* OPENING */
+    .opening {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, #0b1c2d, #081421);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 5;
+      text-align: center;
+      animation: fadeIn 2s ease;
+    }
+
+    .opening h1 {
+      font-size: 30px;
+      margin-bottom: 12px;
+      color: #ffd6e8;
+    }
+
+    .opening p {
+      font-size: 16px;
+      opacity: 0.85;
+      margin-bottom: 25px;
+    }
+
+    .open-btn {
+      padding: 12px 30px;
+      border: none;
+      border-radius: 30px;
+      background: #ffd6e8;
+      color: #0b1c2d;
+      font-size: 15px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .open-btn:hover {
+      background: #ffb3d9;
+    }
+
+    /* LETTER */
+    .letter {
+      position: relative;
+      z-index: 2;
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(12px);
+      padding: 35px 30px;
+      border-radius: 20px;
+      max-width: 500px;
+      text-align: center;
+      box-shadow: 0 0 30px rgba(0,0,0,0.5);
+      display: none;
+      animation: fadeIn 1.5s ease;
+    }
+
+    .letter h2 {
+      font-size: 26px;
+      margin-bottom: 20px;
+      color: #ffd6e8;
+    }
+
+    #typedText {
+      font-size: 16px;
+      line-height: 1.7;
+      white-space: pre-line;
+      min-height: 190px;
+    }
+
+    .music-btn {
+      margin-top: 22px;
+      padding: 10px 24px;
+      border: none;
+      border-radius: 30px;
+      background: #ffd6e8;
+      color: #0b1c2d;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    .footer {
+      margin-top: 16px;
+      font-size: 13px;
+      opacity: 0.8;
+    }
+
+    /* HEARTS */
+    .heart {
+      position: absolute;
+      top: -10px;
+      color: rgba(255, 182, 193, 0.8);
+      font-size: 20px;
+      animation: fall linear forwards;
+      z-index: 1;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(110vh);
+        opacity: 0;
+      }
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- OPENING -->
+  <div class="opening" id="opening">
+    <h1>Halo sayangku 🤍</h1>
+    <p>nice to see you here… aku kangen</p>
+    <button class="open-btn" onclick="openLetter()">Buka Surat</button>
+  </div>
+
+  <!-- LETTER -->
+  <div class="letter" id="letter">
+    <h2>Selamat Tahun Baru</h2>
+
+    <div id="typedText"></div>
+
+    <button class="music-btn" onclick="playMusic()">▶ Putar Musik</button>
+
+    <div class="footer">
+      — dari aku, yang selalu sayang kamu
+    </div>
+  </div>
+
+  <!-- MUSIK -->
+  <audio id="bgMusic" loop>
+    <source src="music.mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+    const text = `Tahun boleh berganti,
+tapi satu hal yang ga berubah
+adalah rasa sayang yang kamu kasih ke aku.
+
+Sayangku, semoga semua hal baik selalu nemuin kamu lebih dulu.
+Selamat tahun baru, orang kesayanganku.
+I love u more than everything, sayang.`;
+
+    let index = 0;
+
+    function openLetter() {
+      document.getElementById("opening").style.display = "none";
+      document.getElementById("letter").style.display = "block";
+      typeText();
+      playMusic();
+    }
+
+    function typeText() {
+      if (index < text.length) {
+        document.getElementById("typedText").innerHTML += text.charAt(index);
+        index++;
+        setTimeout(typeText, 50);
+      }
+    }
+
+    function playMusic() {
+      document.getElementById("bgMusic").play();
+    }
+
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.className = "heart";
+      heart.innerHTML = "❤";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.fontSize = (14 + Math.random() * 20) + "px";
+      heart.style.animationDuration = (4 + Math.random() * 4) + "s";
+      document.body.appendChild(heart);
+
+      setTimeout(() => heart.remove(), 8000);
+    }
+
+    setInterval(createHeart, 300);
+  </script>
+
+</body>
+</html>
